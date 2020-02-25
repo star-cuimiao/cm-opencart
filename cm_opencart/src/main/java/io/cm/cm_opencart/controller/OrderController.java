@@ -1,7 +1,7 @@
 package io.cm.cm_opencart.controller;
 
-import io.cm.cm_opencart.dto.out.OrderListOutDTO;
-import io.cm.cm_opencart.dto.out.PageOutDTO;
+import io.cm.cm_opencart.dto.in.OrderSearchInDTO;
+import io.cm.cm_opencart.dto.out.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,33 +9,25 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
 
     @GetMapping("/search")
-    public PageOutDTO<OrderListOutDTO> search(@RequestParam(required = false) String customer_name,
-                                              @RequestParam(required = false) Byte status,
-                                              @RequestParam(required = false) Double total_price,
-                                              @RequestParam(required = false) Integer reword_points ,
-                                              @RequestParam(required = false) Long create_time,
-                                              @RequestParam(required = false, defaultValue = "1") Integer pageNum){
+    public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
+                                              @RequestParam Integer pageNum){
         return null;
     }
 
     @GetMapping("/getById")
-    public OrderListOutDTO getById(@RequestParam Integer order_id){
+    public OrderShowOutDTO getById(@RequestParam Integer orderId){
         return null;
 
     }
 
-    @GetMapping("/getByCustomersId")
-    public OrderListOutDTO getByCustomersId(@RequestParam Integer customers_id){
+    @GetMapping("/getInvoice")
+    public OrderInvoiceShowOutDTO getInvoice(@RequestParam Long orderId){
         return null;
     }
 
-    @PostMapping("/create")
-    public OrderListOutDTO create(@RequestBody OrderListOutDTO orderListOutDTO){
+    @GetMapping("/getShipInfo")
+    public OrderShipShowOutDTO getShipInfo(@RequestBody Long orderId){
         return null;
     }
 
-    @PostMapping("/update")
-    public OrderListOutDTO update(@RequestBody OrderListOutDTO orderListOutDTO){
-        return null;
-    }
 }

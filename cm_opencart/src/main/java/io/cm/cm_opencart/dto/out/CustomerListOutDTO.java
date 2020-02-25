@@ -25,6 +25,14 @@ public class CustomerListOutDTO {
         this.username = username;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     public String getMobile() {
         return mobile;
     }
@@ -55,13 +63,5 @@ public class CustomerListOutDTO {
 
     public void setCreateTimestamp(Long createTimestamp) {
         this.createTimestamp = createTimestamp;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
     }
 }

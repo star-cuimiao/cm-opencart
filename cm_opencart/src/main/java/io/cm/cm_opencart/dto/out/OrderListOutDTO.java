@@ -1,50 +1,53 @@
 package io.cm.cm_opencart.dto.out;
 
 public class OrderListOutDTO {
-
-    private Integer order_id;
-    private Integer customers_id;
-    private String customer_name;
+    private Long orderId;
+    private Integer customerId;
+    private String customerName;
     private Byte status;
-    private Double total_price;
-    private Integer reword_points ;
-    private Long create_time;
+    private Double totalPirce;
+    private Long createTimestamp;
+    private Long updateTimestamp;
 
-    public OrderListOutDTO(Integer order_id, Integer customers_id, String customer_name, Byte status, Double total_price, Long create_time, Long update_time) {
-        this.order_id = order_id;
-        this.customers_id = customers_id;
-        this.customer_name = customer_name;
-        this.status = status;
-        this.total_price = total_price;
-        this.reword_points = reword_points;
-        this.create_time = create_time;
+
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public OrderListOutDTO() {
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Integer getCustomers_id() {
-        return customers_id;
+    public Double getTotalPirce() {
+        return totalPirce;
     }
 
-    public void setCustomers_id(Integer customers_id) {
-        this.customers_id = customers_id;
+    public void setTotalPirce(Double totalPirce) {
+        this.totalPirce = totalPirce;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public Long getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Long updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 
     public Byte getStatus() {
@@ -55,40 +58,11 @@ public class OrderListOutDTO {
         this.status = status;
     }
 
-    public Double getTotal_price() {
-        return total_price;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setTotal_price(Double total_price) {
-        this.total_price = total_price;
-    }
-
-    public Integer getReword_points() {
-        return reword_points;
-    }
-
-    public void setReword_points(Integer reword_points) {
-        this.reword_points = reword_points;
-    }
-
-    public Long getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(Long create_time) {
-        this.create_time = create_time;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderListOutDTO{" +
-                "order_id=" + order_id +
-                ", customers_id=" + customers_id +
-                ", customer_name='" + customer_name + '\'' +
-                ", status=" + status +
-                ", total_price=" + total_price +
-                ", reword_points=" + reword_points +
-                ", create_time=" + create_time +
-                '}';
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }

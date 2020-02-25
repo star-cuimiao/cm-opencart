@@ -1,55 +1,47 @@
 package io.cm.cm_opencart.dto.out;
 
 public class OrderHistoryListOutDTO {
-    private Integer order_history_id;
-    private Integer order_id;
-    private Long time;
-    private Byte order_status;
-    private String comment;
-    private Boolean customer_notified;
 
-    public OrderHistoryListOutDTO(Integer order_history_id, Integer order_id, Long time, Byte order_status, String comment, Boolean customer_notified) {
-        this.order_history_id = order_history_id;
-        this.order_id = order_id;
-        this.time = time;
-        this.order_status = order_status;
-        this.comment = comment;
-        this.customer_notified = customer_notified;
-    }
+    private Long orderHistoryId;
+    private Long timestamp;
+    private Byte orderStatus;
+    private String comment;
+    private Boolean customerNotified;
 
     public OrderHistoryListOutDTO() {
     }
 
-    public Integer getOrder_history_id() {
-        return order_history_id;
+    public OrderHistoryListOutDTO(Long orderHistoryId, Long timestamp, Byte orderStatus, String comment, Boolean customerNotified) {
+        this.orderHistoryId = orderHistoryId;
+        this.timestamp = timestamp;
+        this.orderStatus = orderStatus;
+        this.comment = comment;
+        this.customerNotified = customerNotified;
+
     }
 
-    public void setOrder_history_id(Integer order_history_id) {
-        this.order_history_id = order_history_id;
+    public Long getOrderHistoryId() {
+        return orderHistoryId;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public void setOrderHistoryId(Long orderHistoryId) {
+        this.orderHistoryId = orderHistoryId;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
-    public Long getTime() {
-        return time;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public void setTime(Long time) {
-        this.time = time;
+    public Byte getOrderStatus() {
+        return orderStatus;
     }
 
-    public Byte getOrder_status() {
-        return order_status;
-    }
-
-    public void setOrder_status(Byte order_status) {
-        this.order_status = order_status;
+    public void setOrderStatus(Byte orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getComment() {
@@ -60,23 +52,11 @@ public class OrderHistoryListOutDTO {
         this.comment = comment;
     }
 
-    public Boolean getCustomer_notified() {
-        return customer_notified;
+    public Boolean getCustomerNotified() {
+        return customerNotified;
     }
 
-    public void setCustomer_notified(Boolean customer_notified) {
-        this.customer_notified = customer_notified;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderHistoryListOutDTO{" +
-                "order_history_id=" + order_history_id +
-                ", order_id=" + order_id +
-                ", time=" + time +
-                ", order_status=" + order_status +
-                ", comment='" + comment + '\'' +
-                ", customer_notified=" + customer_notified +
-                '}';
+    public void setCustomerNotified(Boolean customerNotified) {
+        this.customerNotified = customerNotified;
     }
 }

@@ -3,21 +3,23 @@ package io.cm.cm_opencart.controller;
 import io.cm.cm_opencart.dto.in.*;
 import io.cm.cm_opencart.dto.out.AdministratorGetProfileOutDTO;
 import io.cm.cm_opencart.dto.out.AdministratorListOutDTO;
+import io.cm.cm_opencart.dto.out.AdministratorShowOutDTO;
 import io.cm.cm_opencart.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/administrator")
 public class AdministratorController {
 
-    @GetMapping("/long")
-    public String login(@RequestParam String username,
-                        @RequestParam String password){
+    @GetMapping("/login")
+    public String login(AdministratorLoginInDTO administratorLoginInDTO){
         return null;
     }
 
     @GetMapping("/getProfile")
-    public AdministratorGetProfileOutDTO getProfile(Integer administratorId){
+    public AdministratorGetProfileOutDTO getProfile(@RequestParam(required = false) Integer adminstratorId){
         return null;
     }
 
@@ -26,8 +28,23 @@ public class AdministratorController {
 
     }
 
+    @GetMapping("/getPwdResetCode")
+    public String getPwdResetCode(@RequestParam String email){
+        return null;
+    }
+
+    @PostMapping("/resetPwd")
+    public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO){
+
+    }
+
     @GetMapping("/getList")
-    public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
+    public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam Integer pageNum){
+        return null;
+    }
+
+    @GetMapping("/getById")
+    public AdministratorShowOutDTO getById(@RequestParam Integer administratorId){
         return null;
     }
 
@@ -41,26 +58,14 @@ public class AdministratorController {
 
     }
 
-    @GetMapping("/sendPasswordResetCodeToEmail")
-    public void sendPasswordResetCodeToEmail(@RequestParam String email){
+    @PostMapping("/delete")
+    public void delete(@RequestBody Integer adminstratorId){
 
     }
 
-    @PostMapping("/resetPassword")
-    public void resetPasswordByEmail(@RequestBody AdministratorResetPwdEmailInDTO administratorResetPwdEmailInDTO){
+    @PostMapping("/batchDelete")
+    public void batchDelete(@RequestBody List<Integer> administratorIds){
 
     }
-
-    @GetMapping("/sendPasswordResetCodeToMobile")
-    public void sendPasswordResetCodeToMobile(@RequestParam String mobile){
-
-    }
-
-    @PostMapping("/resetPassword")
-    public void resetPasswordByMobile(@RequestBody AdministratorResetPwdMobileInDTO administratorResetPwdMobileInDTO){
-
-    }
-
-
 
 }

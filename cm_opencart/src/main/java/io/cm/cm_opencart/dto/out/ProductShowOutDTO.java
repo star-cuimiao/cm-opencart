@@ -3,35 +3,18 @@ package io.cm.cm_opencart.dto.out;
 import java.util.List;
 
 public class ProductShowOutDTO {
-
     private Integer productId;
     private String productCode;
     private String productName;
     private Double price;
     private Double discount;
-    private Integer quantity;
+    private Integer stockQuantity;
     private Byte status;
     private String mainPicUrl;
     private Integer rewordPoints;
+    private Integer sortOrder;
     private String description;
     private List<String> otherPicUrls;
-
-    public ProductShowOutDTO() {
-    }
-
-    public ProductShowOutDTO(Integer productId, String productCode, String productName, Double price, Double discount, Integer quantity, Byte status, String mainPicUrl, Integer rewordPoints, String description, List<String> otherPicUrls) {
-        this.productId = productId;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.price = price;
-        this.discount = discount;
-        this.quantity = quantity;
-        this.status = status;
-        this.mainPicUrl = mainPicUrl;
-        this.rewordPoints = rewordPoints;
-        this.description = description;
-        this.otherPicUrls = otherPicUrls;
-    }
 
     public Integer getProductId() {
         return productId;
@@ -73,12 +56,12 @@ public class ProductShowOutDTO {
         this.discount = discount;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Byte getStatus() {
@@ -105,6 +88,14 @@ public class ProductShowOutDTO {
         this.rewordPoints = rewordPoints;
     }
 
+    public Integer getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -119,22 +110,5 @@ public class ProductShowOutDTO {
 
     public void setOtherPicUrls(List<String> otherPicUrls) {
         this.otherPicUrls = otherPicUrls;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductShowOutDTO{" +
-                "productId=" + productId +
-                ", productCode='" + productCode + '\'' +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", quantity=" + quantity +
-                ", status=" + status +
-                ", mainPicUrl='" + mainPicUrl + '\'' +
-                ", rewordPoints=" + rewordPoints +
-                ", description='" + description + '\'' +
-                ", otherPicUrls=" + otherPicUrls +
-                '}';
     }
 }

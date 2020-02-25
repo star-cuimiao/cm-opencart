@@ -1,6 +1,6 @@
 package io.cm.cm_opencart.dto.out;
 
-public class AddressShowOutDTO {
+public class AddressListOutDTO {
     private Integer addressId;
     private String receiverName;
     private String receiverMobile;

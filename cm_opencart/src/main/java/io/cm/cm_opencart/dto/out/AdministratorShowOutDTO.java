@@ -1,18 +1,26 @@
-package io.cm.cm_opencart.dto.in;
+package io.cm.cm_opencart.dto.out;
 
-public class AdministratorUpdateProfileInDTO {
-    private String realName;
+public class AdministratorShowOutDTO {
+    private Integer administratorId;
+    private String username;
     private String email;
     private String avatarUrl;
-    private String password;
     private Byte status;
 
-    public String getRealName() {
-        return realName;
+    public Integer getAdministratorId() {
+        return administratorId;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setAdministratorId(Integer administratorId) {
+        this.administratorId = administratorId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -29,14 +37,6 @@ public class AdministratorUpdateProfileInDTO {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Byte getStatus() {

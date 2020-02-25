@@ -4,9 +4,18 @@ public class AdministratorGetProfileOutDTO {
     private Integer administratorId;
     private String username;
     private String realName;
-    private String mobile;
     private String email;
     private String avatarUrl;
+    private Byte status;
+    private Long createTimestamp;
+
+    public Integer getAdministratorId() {
+        return administratorId;
+    }
+
+    public void setAdministratorId(Integer administratorId) {
+        this.administratorId = administratorId;
+    }
 
     public String getUsername() {
         return username;
@@ -22,14 +31,6 @@ public class AdministratorGetProfileOutDTO {
 
     public void setRealName(String realName) {
         this.realName = realName;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public String getEmail() {
@@ -48,11 +49,19 @@ public class AdministratorGetProfileOutDTO {
         this.avatarUrl = avatarUrl;
     }
 
-    public Integer getAdministratorId() {
-        return administratorId;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setAdministratorId(Integer administratorId) {
-        this.administratorId = administratorId;
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Long getCreateTimestamp() {
+        return createTimestamp;
+    }
+
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 }

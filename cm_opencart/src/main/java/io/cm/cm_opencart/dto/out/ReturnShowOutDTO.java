@@ -1,76 +1,62 @@
 package io.cm.cm_opencart.dto.out;
 
 public class ReturnShowOutDTO {
-
-    private Integer return_id;
-    private Integer order_id;
-    private Long order_time;
-    private String customer_name;
+    private Integer returnId;
+    private Long orderId;
+    private Long orderTimestamp;
+    private Integer customerId;
+    private String customerName;
     private String mobile;
     private String email;
     private Byte status;
-    private Byte return_action;
-    private String product_code;
-    private String product_name;
+    private Byte action;
+    private String productCode;
+    private String productName;
     private Integer quantity;
-    private String reason;
+    private Byte reason;
     private Boolean opened;
     private String comment;
-    private Long create_time;
-    private Long update_time;
+    private Long createTimestamp;
+    private Long updateTimestamp;
 
-    public ReturnShowOutDTO() {
+    public Integer getReturnId() {
+        return returnId;
     }
 
-    public ReturnShowOutDTO(Integer return_id, Integer order_id, Long order_time, String customer_name, String mobile, String email, Byte status, Byte return_action, String product_code, String product_name, Integer quantity, String reason, Boolean opened, String comment, Long create_time, Long update_time) {
-        this.return_id = return_id;
-        this.order_id = order_id;
-        this.order_time = order_time;
-        this.customer_name = customer_name;
-        this.mobile = mobile;
-        this.email = email;
-        this.status = status;
-        this.return_action = return_action;
-        this.product_code = product_code;
-        this.product_name = product_name;
-        this.quantity = quantity;
-        this.reason = reason;
-        this.opened = opened;
-        this.comment = comment;
-        this.create_time = create_time;
-        this.update_time = update_time;
+    public void setReturnId(Integer returnId) {
+        this.returnId = returnId;
     }
 
-    public Integer getReturn_id() {
-        return return_id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setReturn_id(Integer return_id) {
-        this.return_id = return_id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Long getOrderTimestamp() {
+        return orderTimestamp;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrderTimestamp(Long orderTimestamp) {
+        this.orderTimestamp = orderTimestamp;
     }
 
-    public Long getOrder_time() {
-        return order_time;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setOrder_time(Long order_time) {
-        this.order_time = order_time;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getMobile() {
@@ -97,28 +83,28 @@ public class ReturnShowOutDTO {
         this.status = status;
     }
 
-    public Byte getReturn_action() {
-        return return_action;
+    public Byte getAction() {
+        return action;
     }
 
-    public void setReturn_action(Byte return_action) {
-        this.return_action = return_action;
+    public void setAction(Byte action) {
+        this.action = action;
     }
 
-    public String getProduct_code() {
-        return product_code;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setProduct_code(String product_code) {
-        this.product_code = product_code;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Integer getQuantity() {
@@ -129,11 +115,11 @@ public class ReturnShowOutDTO {
         this.quantity = quantity;
     }
 
-    public String getReason() {
+    public Byte getReason() {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(Byte reason) {
         this.reason = reason;
     }
 
@@ -153,41 +139,19 @@ public class ReturnShowOutDTO {
         this.comment = comment;
     }
 
-    public Long getCreate_time() {
-        return create_time;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCreate_time(Long create_time) {
-        this.create_time = create_time;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 
-    public Long getUpdate_time() {
-        return update_time;
+    public Long getUpdateTimestamp() {
+        return updateTimestamp;
     }
 
-    public void setUpdate_time(Long update_time) {
-        this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        return "ReturnShowOutDTO{" +
-                "return_id=" + return_id +
-                ", order_id=" + order_id +
-                ", order_time=" + order_time +
-                ", customer_name='" + customer_name + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", email='" + email + '\'' +
-                ", status=" + status +
-                ", return_action=" + return_action +
-                ", product_code='" + product_code + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", quantity=" + quantity +
-                ", reason='" + reason + '\'' +
-                ", opened=" + opened +
-                ", comment='" + comment + '\'' +
-                ", create_time=" + create_time +
-                ", update_time=" + update_time +
-                '}';
+    public void setUpdateTimestamp(Long updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }

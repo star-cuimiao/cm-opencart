@@ -1,6 +1,7 @@
 package io.cm.cm_opencart.controller;
 
 import io.cm.cm_opencart.dto.in.ProductCreateInDTO;
+import io.cm.cm_opencart.dto.in.ProductSearchInDTO;
 import io.cm.cm_opencart.dto.in.ProductUpdateInDTO;
 import io.cm.cm_opencart.dto.out.PageOutDTO;
 import io.cm.cm_opencart.dto.out.ProductListOutDTO;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     @GetMapping("/search")
-    public PageOutDTO<ProductListOutDTO> search(@RequestParam(required = false) String productCode,
-                                                @RequestParam(required = false) String productName,
-                                                @RequestParam(required = false) Byte status,
+    public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
                                                 @RequestParam(required = false,defaultValue = "1") Integer PageNum){
         return null;
     }

@@ -1,18 +1,18 @@
 package io.cm.cm_opencart.dto.in;
 
-public class AdministratorUpdateInDTO {
-    private Integer administratorId;
+public class CustomerSearchInDTO {
+    private String username;
     private String realName;
-    private String password;
+    private String mobile;
     private String email;
     private Byte status;
 
-    public Integer getAdministratorId() {
-        return administratorId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdministratorId(Integer administratorId) {
-        this.administratorId = administratorId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {
@@ -23,12 +23,12 @@ public class AdministratorUpdateInDTO {
         this.realName = realName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {

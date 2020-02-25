@@ -1,22 +1,11 @@
-package io.cm.cm_opencart.dto.out;
+package io.cm.cm_opencart.dto.in;
 
-public class ProductListOutDTO {
-    private Integer productId;
+public class ProductSearchInDTO {
     private String productCode;
     private String productName;
     private Double price;
-    private Double discount;
     private Integer stockQuantity;
     private Byte status;
-    private String mainPicUrl;
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
 
     public String getProductCode() {
         return productCode;
@@ -42,14 +31,6 @@ public class ProductListOutDTO {
         this.price = price;
     }
 
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
     public Integer getStockQuantity() {
         return stockQuantity;
     }
@@ -64,13 +45,5 @@ public class ProductListOutDTO {
 
     public void setStatus(Byte status) {
         this.status = status;
-    }
-
-    public String getMainPicUrl() {
-        return mainPicUrl;
-    }
-
-    public void setMainPicUrl(String mainPicUrl) {
-        this.mainPicUrl = mainPicUrl;
     }
 }
