@@ -19,7 +19,8 @@ public class AddressController {
 
     @GetMapping("/getListCustomerId")
     public List<AddressListOutDTO> getListCustomerId(@RequestParam Integer customerId){
-        return null;
+        List<AddressListOutDTO> listCustomerId = addressService.getListCustomerId(customerId);
+        return listCustomerId;
     }
 
 }
