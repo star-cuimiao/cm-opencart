@@ -1,10 +1,16 @@
-package io.cm.cmstorkback.dto.out;
+package io.cm.cm_opencart.po;
 
-public class AddressListOutDTO {
+public class Address {
     private Integer addressId;
+
+    private Integer customerId;
+
     private String receiverName;
+
     private String receiverMobile;
+
     private String content;
+
     private String tag;
 
     public Integer getAddressId() {
@@ -15,12 +21,20 @@ public class AddressListOutDTO {
         this.addressId = addressId;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
     public String getReceiverName() {
         return receiverName;
     }
 
     public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
+        this.receiverName = receiverName == null ? null : receiverName.trim();
     }
 
     public String getReceiverMobile() {
@@ -28,7 +42,7 @@ public class AddressListOutDTO {
     }
 
     public void setReceiverMobile(String receiverMobile) {
-        this.receiverMobile = receiverMobile;
+        this.receiverMobile = receiverMobile == null ? null : receiverMobile.trim();
     }
 
     public String getContent() {
@@ -36,7 +50,7 @@ public class AddressListOutDTO {
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.content = content == null ? null : content.trim();
     }
 
     public String getTag() {
@@ -44,6 +58,6 @@ public class AddressListOutDTO {
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        this.tag = tag == null ? null : tag.trim();
     }
 }
