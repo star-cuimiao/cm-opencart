@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    Page<ProductListOutDTO> search(Integer PageNum);
+    Page<ProductListOutDTO> search(Integer pageNum);
 
     ProductShowOutDTO getById(Integer productId);
 

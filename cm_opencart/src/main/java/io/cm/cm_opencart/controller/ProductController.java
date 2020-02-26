@@ -22,8 +22,8 @@ public class ProductController {
 
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
-                                                @RequestParam(required = false,defaultValue = "1") Integer PageNum){
-        Page<ProductListOutDTO> page = productService.search(PageNum);
+                                                @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        Page<ProductListOutDTO> page = productService.search(pageNum);
 
         PageOutDTO<ProductListOutDTO> pageOutDto = new PageOutDTO<ProductListOutDTO>();
         pageOutDto.setTotal(page.getTotal());

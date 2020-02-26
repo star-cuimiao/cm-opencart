@@ -27,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductDetailMapper productDetailMapper;
 
     @Override
-    public Page<ProductListOutDTO> search(Integer PageNum) {
+    public Page<ProductListOutDTO> search(Integer pageNum) {
 
-        PageHelper.startPage(PageNum,10);
+        PageHelper.startPage(pageNum,10);
         Page<ProductListOutDTO> page = productMapper.search();
         return page;
     }

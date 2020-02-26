@@ -1,5 +1,6 @@
 package io.cm.cm_opencart.controller;
 
+import com.github.pagehelper.Page;
 import io.cm.cm_opencart.dto.in.CustomerSearchInDTO;
 import io.cm.cm_opencart.dto.out.CustomerListOutDTO;
 import io.cm.cm_opencart.dto.out.CustomerShowOutDTO;
@@ -18,13 +19,19 @@ public class CustomerController {
     @GetMapping("/search")
     public PageOutDTO<CustomerListOutDTO> search(CustomerSearchInDTO customerSearchInDTO,
                                                  @RequestParam(required = false,defaultValue = "1") Integer pageNum){
-
-        return null;
+        Page<CustomerListOutDTO> page = customerService.search(pageNum);
+        PageOutDTO<CustomerListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(page);
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")
     public CustomerShowOutDTO getById(@RequestParam Integer customerId){
-        return null;
+        CustomerShowOutDTO customerById = customerService.getById(customerId);
+        return customerById;
     }
 
     @PostMapping("/disable")
