@@ -1,7 +1,9 @@
 package io.cm.cm_opencart.dao;
 
 import io.cm.cm_opencart.po.Return;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ReturnMapper {
     int deleteByPrimaryKey(Integer returnId);
 

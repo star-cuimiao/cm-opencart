@@ -5,6 +5,8 @@ import io.cm.cm_opencart.dto.out.AdministratorGetProfileOutDTO;
 import io.cm.cm_opencart.dto.out.AdministratorListOutDTO;
 import io.cm.cm_opencart.dto.out.AdministratorShowOutDTO;
 import io.cm.cm_opencart.dto.out.PageOutDTO;
+import io.cm.cm_opencart.service.AdministratorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/administrator")
 public class AdministratorController {
+
+    @Autowired
+    private AdministratorService administratorService;
 
     @GetMapping("/login")
     public String login(AdministratorLoginInDTO administratorLoginInDTO){

@@ -1,7 +1,9 @@
 package io.cm.cm_opencart.dao;
 
 import io.cm.cm_opencart.po.ReturnHistory;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ReturnHistoryMapper {
     int deleteByPrimaryKey(Long returnHistoryId);
 
