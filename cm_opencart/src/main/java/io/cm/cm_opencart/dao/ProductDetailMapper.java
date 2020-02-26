@@ -1,7 +1,6 @@
 package io.cm.cm_opencart.dao;
 
 import io.cm.cm_opencart.po.ProductDetail;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface ProductDetailMapper {
 
     int insertSelective(ProductDetail record);
 
-    ProductDetail selectByPrimaryKey(@Param("productId") Integer productId);
+    ProductDetail selectByPrimaryKey(Integer productId);
 
     int updateByPrimaryKeySelective(ProductDetail record);
 

@@ -1,24 +1,11 @@
 package io.cm.cm_opencart.dto.out;
 
 public class OrderHistoryListOutDTO {
-
     private Long orderHistoryId;
     private Long timestamp;
     private Byte orderStatus;
     private String comment;
     private Boolean customerNotified;
-
-    public OrderHistoryListOutDTO() {
-    }
-
-    public OrderHistoryListOutDTO(Long orderHistoryId, Long timestamp, Byte orderStatus, String comment, Boolean customerNotified) {
-        this.orderHistoryId = orderHistoryId;
-        this.timestamp = timestamp;
-        this.orderStatus = orderStatus;
-        this.comment = comment;
-        this.customerNotified = customerNotified;
-
-    }
 
     public Long getOrderHistoryId() {
         return orderHistoryId;
