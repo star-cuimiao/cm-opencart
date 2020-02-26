@@ -25,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public CustomerShowOutDTO getById(Integer customerId) {
+
         Customer customer = customerMapper.selectByPrimaryKey(customerId);
 
         CustomerShowOutDTO customerShowOutDTO = new CustomerShowOutDTO();
@@ -35,12 +36,17 @@ public class CustomerServiceImpl implements CustomerService{
         customerShowOutDTO.setMobile(customer.getMobile());
         customerShowOutDTO.setEmail(customer.getEmail());
         customerShowOutDTO.setStatus(customer.getStatus());
-//        customerShowOutDTO.setCreateTimestamp(customer.getCreateTimestamp());
-//        customerShowOutDTO.setCreateTimestamp(customer.getCreateTimestamp());
+        customerShowOutDTO.setCreateTimestamp(customer.getCreateTime());
         customerShowOutDTO.setNewsSubscribed(customer.getNewsSubscribed());
         customerShowOutDTO.setRewordPoints(customer.getRewordPoints());
         customerShowOutDTO.setDefaultAddressId(customer.getDefaultAddressId());
 
         return customerShowOutDTO;
+    }
+
+    @Override
+    public Integer disable(Integer customerId) {
+        Integer disable = customerMapper.disable(customerId);
+        return disable;
     }
 }

@@ -211,4 +211,10 @@
       default_address_id = #{defaultAddressId,jdbcType=INTEGER}
     where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
+  <update id="disable" parameterType="io.cm.cm_opencart.po.Customer">
+    update jcart_customer
+    set
+      status = #{status,jdbcType=TINYINT},
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
 </mapper>

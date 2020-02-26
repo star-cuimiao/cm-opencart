@@ -36,7 +36,8 @@ public class CustomerController {
 
     @PostMapping("/disable")
     public Integer disable(@RequestParam Integer customerId){
-        return null;
+        Integer disable = customerService.disable(customerId);
+        return disable;
     }
 
 }

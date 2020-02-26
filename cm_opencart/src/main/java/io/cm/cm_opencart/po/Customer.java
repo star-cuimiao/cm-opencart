@@ -1,7 +1,5 @@
 package io.cm.cm_opencart.po;
 
-import java.util.Date;
-
 public class Customer {
     private Integer customerId;
 
@@ -23,7 +21,7 @@ public class Customer {
 
     private Byte status;
 
-    private Date createTime;
+    private Long createTime;
 
     private Boolean newsSubscribed;
 
@@ -111,11 +109,11 @@ public class Customer {
         this.status = status;
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
