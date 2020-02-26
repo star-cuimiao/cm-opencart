@@ -4,11 +4,16 @@ import io.cm.cm_opencart.dto.in.ReturnUpdateActionInDTO;
 import io.cm.cm_opencart.dto.out.PageOutDTO;
 import io.cm.cm_opencart.dto.out.ReturnListOutDTO;
 import io.cm.cm_opencart.dto.out.ReturnShowOutDTO;
+import io.cm.cm_opencart.service.ReturnService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/return")
 public class ReturnController {
+
+    @Autowired
+    private ReturnService returnService;
 
     @GetMapping("/search")
     public PageOutDTO<ReturnListOutDTO> search(@RequestParam(required = false) Integer order_id,

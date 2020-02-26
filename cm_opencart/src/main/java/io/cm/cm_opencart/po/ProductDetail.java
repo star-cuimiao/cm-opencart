@@ -1,8 +1,5 @@
 package io.cm.cm_opencart.po;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class ProductDetail {
     private Integer productId;
 

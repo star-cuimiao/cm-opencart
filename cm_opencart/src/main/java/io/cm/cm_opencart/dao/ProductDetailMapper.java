@@ -1,7 +1,12 @@
 package io.cm.cm_opencart.dao;
 
 import io.cm.cm_opencart.po.ProductDetail;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ProductDetailMapper {
     int deleteByPrimaryKey(Integer productId);
 
@@ -9,11 +14,13 @@ public interface ProductDetailMapper {
 
     int insertSelective(ProductDetail record);
 
-    ProductDetail selectByPrimaryKey(Integer productId);
+    ProductDetail selectByPrimaryKey(@Param("productId") Integer productId);
 
     int updateByPrimaryKeySelective(ProductDetail record);
 
     int updateByPrimaryKeyWithBLOBs(ProductDetail record);
 
     int updateByPrimaryKey(ProductDetail record);
+
+    void batchDelete(List<Integer> productIds);
 }

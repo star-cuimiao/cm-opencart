@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
+
     @Autowired
     private CustomerService customerService;
 
     @GetMapping("/search")
     public PageOutDTO<CustomerListOutDTO> search(CustomerSearchInDTO customerSearchInDTO,
-                                                 @RequestParam Integer pageNum){
+                                                 @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+
         return null;
     }
 
