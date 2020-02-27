@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orderhistory")
+@CrossOrigin
 public class OrderHistoryController {
 
     @Autowired

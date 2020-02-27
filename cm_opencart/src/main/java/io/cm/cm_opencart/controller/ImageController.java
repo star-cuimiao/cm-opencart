@@ -2,10 +2,7 @@ package io.cm.cm_opencart.controller;
 
 import io.cm.cm_opencart.constant.ClientExceptionConstant;
 import io.cm.cm_opencart.exception.ClientException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
@@ -16,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin
 public class ImageController {
 
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
