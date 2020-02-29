@@ -6,7 +6,6 @@ public class AddressCreateInDTO {
     private String content;
     private String tag;
 
-
     public String getReceiverName() {
         return receiverName;
     }

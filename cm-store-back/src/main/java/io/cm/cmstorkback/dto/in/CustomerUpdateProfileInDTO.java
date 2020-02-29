@@ -1,7 +1,6 @@
 package io.cm.cmstorkback.dto.in;
 
 public class CustomerUpdateProfileInDTO {
-
     private String realName;
     private String mobile;
     private String email;
@@ -30,4 +29,3 @@ public class CustomerUpdateProfileInDTO {
         this.email = email;
     }
 }
-

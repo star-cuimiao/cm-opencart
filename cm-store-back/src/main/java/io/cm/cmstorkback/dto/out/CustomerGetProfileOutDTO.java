@@ -1,6 +1,6 @@
 package io.cm.cmstorkback.dto.out;
 
-public class CustomerProfileOutDTO {
+public class CustomerGetProfileOutDTO {
     private Integer customerId;
     private String username;
     private String realName;
