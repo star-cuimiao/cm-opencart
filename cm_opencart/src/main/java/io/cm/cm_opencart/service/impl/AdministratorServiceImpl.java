@@ -13,6 +13,13 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public Administrator getByUsername(String username) {
-        return administratorMapper.selectByUsername(username);
+        Administrator administrator = administratorMapper.selectByUsername(username);
+        return administrator;
+    }
+
+    @Override
+    public Administrator getById(Integer adminstratorId) {
+        Administrator administrator = administratorMapper.selectByPrimaryKey(adminstratorId);
+        return administrator;
     }
 }
