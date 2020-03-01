@@ -48,15 +48,20 @@ public class AdministratorController {
         administratorGetProfileOutDTO.setRealName(administrator.getRealName());
         administratorGetProfileOutDTO.setEmail(administrator.getEmail());
         administratorGetProfileOutDTO.setAvatarUrl(administrator.getAvatarUrl());
-        administratorGetProfileOutDTO.setStatus(administrator.getStatus());
         administratorGetProfileOutDTO.setCreateTimestamp(administrator.getCreateTime().getTime());
 
         return administratorGetProfileOutDTO;
     }
 
     @PostMapping("/updateProfile")
-    public void updateProfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO){
-
+    public void updateProfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO,
+                              @RequestAttribute Integer administratorId){
+        Administrator administrator = new Administrator();
+        administrator.setAdministratorId(administratorId);
+        administrator.setRealName(administratorUpdateProfileInDTO.getRealName());
+        administrator.setEmail(administratorUpdateProfileInDTO.getEmail());
+        administrator.setAvatarUrl(administratorUpdateProfileInDTO.getAvatarUrl());
+        administratorService.update(administrator);
     }
 
     @GetMapping("/getPwdResetCode")

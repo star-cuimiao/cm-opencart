@@ -1,6 +1,7 @@
 package io.cm.cm_opencart.dao;
 
 import io.cm.cm_opencart.po.Administrator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +18,6 @@ public interface AdministratorMapper {
 
     int updateByPrimaryKey(Administrator record);
 
-    Administrator selectByUsername(String username);
+    Administrator selectByUsername(@Param("username") String username);
 
 }
