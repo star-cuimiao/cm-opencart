@@ -111,6 +111,12 @@ public class AdministratorController {
         administrator.setRealName(administratorUpdateInDTO.getRealName());
         administrator.setEmail(administratorUpdateInDTO.getEmail());
         administrator.setStatus(administratorUpdateInDTO.getStatus());
+        String password = administratorUpdateInDTO.getPassword();
+
+        if(password != null && !password.isEmpty()){
+            String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+            administrator.setEncryptedPassword(bcryptHashString);
+        }
         administratorService.update(administrator);
     }
 
