@@ -127,9 +127,18 @@
     from jcart_administrator
     where username = #{username}
   </select>
-  <select id="getList"  resultMap="BaseResultMap">
+
+  <select id="selectList"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from jcart_administrator
   </select>
+
+  <delete id="batchDelete" parameterType="java.lang.Integer">
+    delete from jcart_administrator where administrator_id in
+    <foreach item="item" index="index" collection="administratorIds"
+             open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </delete>
 </mapper>

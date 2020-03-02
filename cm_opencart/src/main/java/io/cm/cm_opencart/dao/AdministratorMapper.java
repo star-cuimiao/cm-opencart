@@ -5,10 +5,12 @@ import io.cm.cm_opencart.po.Administrator;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdministratorMapper {
 
-    public Page<Administrator> getList();
+    public Page<Administrator> selectList();
 
     int deleteByPrimaryKey(Integer administratorId);
 
@@ -23,5 +25,7 @@ public interface AdministratorMapper {
     int updateByPrimaryKey(Administrator record);
 
     Administrator selectByUsername(@Param("username") String username);
+
+    int batchDelete(@Param("administratorIds") List<Integer> administratorIds);
 
 }

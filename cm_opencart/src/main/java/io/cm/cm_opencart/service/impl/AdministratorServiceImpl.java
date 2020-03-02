@@ -18,7 +18,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Page<Administrator> getList(Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<Administrator> page = administratorMapper.getList();
+        Page<Administrator> page = administratorMapper.selectList();
         return page;
     }
 
@@ -52,6 +52,6 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public void batchDelete(List<Integer> administratorIds) {
-
+        administratorMapper.batchDelete(administratorIds);
     }
 }
