@@ -1,5 +1,7 @@
 package io.cm.cm_opencart.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.AdministratorMapper;
 import io.cm.cm_opencart.po.Administrator;
 import io.cm.cm_opencart.service.AdministratorService;
@@ -12,6 +14,13 @@ import java.util.List;
 public class AdministratorServiceImpl implements AdministratorService {
     @Autowired
     private AdministratorMapper administratorMapper;
+
+    @Override
+    public Page<Administrator> getList(Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        Page<Administrator> page = administratorMapper.getList();
+        return page;
+    }
 
     @Override
     public Administrator getByUsername(String username) {
