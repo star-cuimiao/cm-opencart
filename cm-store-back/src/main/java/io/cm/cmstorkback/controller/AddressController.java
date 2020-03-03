@@ -3,6 +3,7 @@ package io.cm.cmstorkback.controller;
 import io.cm.cmstorkback.dto.in.AddressCreateInDTO;
 import io.cm.cmstorkback.dto.in.AddressUpdateInDTO;
 import io.cm.cmstorkback.dto.out.AddressListOutDTO;
+import io.cm.cmstorkback.dto.out.AddressShowOutDTO;
 import io.cm.cmstorkback.po.Address;
 import io.cm.cmstorkback.service.AddresssService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,17 @@ public class AddressController {
             return addressListOutDTO;
         }).collect(Collectors.toList());
         return addressListOutDTOS;
+    }
+    @GetMapping("/getById")
+    public AddressShowOutDTO getById(@RequestParam Integer addressId){
+        AddressShowOutDTO address = addresssService.getById(addressId);
+        AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
+        addressShowOutDTO.setAddressId(address.getAddressId());
+        addressShowOutDTO. setReceiverName(address.getReceiverName());
+        addressShowOutDTO.setReceiverMobile(address.getReceiverMobile());
+        addressShowOutDTO.setTag(address.getTag());
+        addressShowOutDTO.setContent(address.getContent());
+        return addressShowOutDTO;
     }
 
     @PostMapping("/create")
