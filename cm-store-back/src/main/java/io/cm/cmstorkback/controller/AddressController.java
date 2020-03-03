@@ -36,7 +36,7 @@ public class AddressController {
     }
     @GetMapping("/getById")
     public AddressShowOutDTO getById(@RequestParam Integer addressId){
-        AddressShowOutDTO address = addresssService.getById(addressId);
+        Address address = addresssService.getById(addressId);
         AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
         addressShowOutDTO.setAddressId(address.getAddressId());
         addressShowOutDTO. setReceiverName(address.getReceiverName());
