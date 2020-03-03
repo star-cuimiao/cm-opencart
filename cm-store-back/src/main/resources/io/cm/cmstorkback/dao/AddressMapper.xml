@@ -18,6 +18,12 @@
     from jcart_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </select>
+  <select id="getByCustomerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jcart_address
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from jcart_address
     where address_id = #{addressId,jdbcType=INTEGER}
@@ -30,12 +36,9 @@
       #{receiverMobile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="io.cm.cmstorkback.po.Address">
+  <insert id="insertSelective" parameterType="io.cm.cmstorkback.po.Address" useGeneratedKeys="true" keyProperty="addressId">
     insert into jcart_address
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="addressId != null">
-        address_id,
-      </if>
       <if test="customerId != null">
         customer_id,
       </if>
@@ -53,9 +56,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="addressId != null">
-        #{addressId,jdbcType=INTEGER},
-      </if>
       <if test="customerId != null">
         #{customerId,jdbcType=INTEGER},
       </if>
@@ -93,6 +93,27 @@
       </if>
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="io.cm.cmstorkback.po.Address">
+    update jcart_address
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null">
+        receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="io.cm.cmstorkback.po.Address">
     update jcart_address
