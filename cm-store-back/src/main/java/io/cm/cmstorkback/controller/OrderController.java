@@ -1,6 +1,8 @@
 package io.cm.cmstorkback.controller;
 
 import io.cm.cmstorkback.dto.in.OrderCheckoutInDTO;
+import io.cm.cmstorkback.dto.out.OrderListOutDTO;
+import io.cm.cmstorkback.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,4 +15,10 @@ public class OrderController {
                             @RequestAttribute Integer customerId){
         return null;
     }
+
+    @GetMapping("/getList")
+    public PageOutDTO<OrderListOutDTO> getList(@RequestAttribute Integer customerId){
+        return null;
+    }
+    
 }
