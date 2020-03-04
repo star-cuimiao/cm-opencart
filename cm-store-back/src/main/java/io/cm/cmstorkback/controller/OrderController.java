@@ -4,6 +4,8 @@ import io.cm.cmstorkback.dto.in.OrderCheckoutInDTO;
 import io.cm.cmstorkback.dto.out.OrderListOutDTO;
 import io.cm.cmstorkback.dto.out.OrderShowOutDTO;
 import io.cm.cmstorkback.dto.out.PageOutDTO;
+import io.cm.cmstorkback.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,14 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class OrderController {
 
+    @Autowired
+    private OrderService orderService;
+
     @PostMapping("/checkout")
-    public Integer checkout(@RequestBody OrderCheckoutInDTO orderCheckoutInDTO,
+    public Long checkout(@RequestBody OrderCheckoutInDTO orderCheckoutInDTO,
                             @RequestAttribute Integer customerId){
-        return null;
+        Long orderId = orderService.checkout(orderCheckoutInDTO, customerId);
+        return orderId;
     }
 
     @GetMapping("/getList")
-    public PageOutDTO<OrderListOutDTO> getList(@RequestAttribute Integer customerId){
+    public PageOutDTO<OrderListOutDTO> getList(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                                               @RequestAttribute Integer customerId){
         return null;
     }
 

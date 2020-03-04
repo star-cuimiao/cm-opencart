@@ -1,7 +1,9 @@
 package io.cm.cmstorkback.dao;
 
 import io.cm.cmstorkback.po.OrderDetail;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(Long orderId);
 
