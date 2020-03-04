@@ -1,7 +1,9 @@
 package io.cm.cmstorkback.dao;
 
 import io.cm.cmstorkback.po.ProductDetail;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductDetailMapper {
     int deleteByPrimaryKey(Integer productId);
 
