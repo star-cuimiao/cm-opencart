@@ -7,13 +7,12 @@ import io.cm.cmstorkback.dao.OrderDetailMapper;
 import io.cm.cmstorkback.dao.OrderMapper;
 import io.cm.cmstorkback.dto.in.OrderCheckoutInDTO;
 import io.cm.cmstorkback.dto.in.OrderProductInDTO;
+import io.cm.cmstorkback.dto.out.OrderHistoryListOutDTO;
 import io.cm.cmstorkback.dto.out.OrderShowOutDTO;
 import io.cm.cmstorkback.enumeration.OrderStatus;
-import io.cm.cmstorkback.po.Address;
-import io.cm.cmstorkback.po.Order;
-import io.cm.cmstorkback.po.OrderDetail;
-import io.cm.cmstorkback.po.Product;
+import io.cm.cmstorkback.po.*;
 import io.cm.cmstorkback.service.AddresssService;
+import io.cm.cmstorkback.service.OrderHistoryService;
 import io.cm.cmstorkback.service.OrderService;
 import io.cm.cmstorkback.service.ProductService;
 import io.cm.cmstorkback.vo.OrderProductVo;
@@ -39,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private AddresssService addresssService;
+
+    @Autowired
+    private OrderHistoryService orderHistoryService;
 
     @Override
     @Transactional
@@ -114,22 +116,36 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderShowOutDTO getById(Long orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(order.getOrderId());
+        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(orderId);
+
         OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
-        orderShowOutDTO.setOrderId(order.getOrderId());
+        orderShowOutDTO.setOrderId(orderId);
         orderShowOutDTO.setStatus(order.getStatus());
         orderShowOutDTO.setTotalPrice(order.getTotalPrice());
         orderShowOutDTO.setRewordPoints(order.getRewordPoints());
         orderShowOutDTO.setCreateTimestamp(order.getCreateTime().getTime());
         orderShowOutDTO.setUpdateTimestamp(order.getUpdateTime().getTime());
+
         orderShowOutDTO.setShipAddress(orderDetail.getShipAddress());
         orderShowOutDTO.setShipPrice(orderDetail.getShipPrice());
         orderShowOutDTO.setPayMethod(orderDetail.getPayMethod());
         orderShowOutDTO.setInvoiceAddress(orderDetail.getInvoiceAddress());
         orderShowOutDTO.setInvoicePrice(orderDetail.getInvoicePrice());
         orderShowOutDTO.setComment(orderDetail.getComment());
-        //        private List<OrderProductOutDTO> orderProducts;
-//        private List<OrderHistoryListOutDTO> orderHistories;
+
+        List<OrderProductVo> orderProductVos = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductVo.class);
+        orderShowOutDTO.setOrderProducts(orderProductVos);
+
+        List<OrderHistory> orderHistories = orderHistoryService.getByOrderId(orderId);
+        List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistories.stream().map(orderHistory -> {
+            OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
+            orderHistoryListOutDTO.setTimestamp(orderHistory.getTime().getTime());
+            orderHistoryListOutDTO.setOrderStatus(orderHistory.getOrderStatus());
+            orderHistoryListOutDTO.setComment(orderHistory.getComment());
+            return orderHistoryListOutDTO;
+        }).collect(Collectors.toList());
+        orderShowOutDTO.setOrderHistories(orderHistoryListOutDTOS);
+
         return orderShowOutDTO;
     }
 }
