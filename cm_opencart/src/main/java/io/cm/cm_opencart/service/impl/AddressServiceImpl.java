@@ -2,7 +2,6 @@ package io.cm.cm_opencart.service.impl;
 
 import io.cm.cm_opencart.dao.AddressMapper;
 import io.cm.cm_opencart.dto.out.AddressListOutDTO;
-import io.cm.cm_opencart.dto.out.AddressShowOutDTO;
 import io.cm.cm_opencart.po.Address;
 import io.cm.cm_opencart.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +21,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public AddressShowOutDTO getById(Integer addressId) {
+    public Address getById(Integer addressId) {
         Address address = addressMapper.selectByPrimaryKey(addressId);
-        AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
-        addressShowOutDTO.setAddressId(addressId);
-        addressShowOutDTO.setContent(address.getContent());
-        addressShowOutDTO.setReceiverMobile(address.getReceiverMobile());
-        addressShowOutDTO.setReceiverName(address.getReceiverName());
-        addressShowOutDTO.setTag(address.getTag());
-        return addressShowOutDTO;
+        return address;
     }
 }
