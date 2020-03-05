@@ -6,12 +6,13 @@ import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.OrderDetailMapper;
 import io.cm.cm_opencart.dao.OrderMapper;
 import io.cm.cm_opencart.dto.out.OrderListOutDTO;
-import io.cm.cm_opencart.dto.out.OrderProductShowOutDTO;
 import io.cm.cm_opencart.dto.out.OrderShowOutDTO;
+import io.cm.cm_opencart.po.Customer;
 import io.cm.cm_opencart.po.Order;
 import io.cm.cm_opencart.po.OrderDetail;
+import io.cm.cm_opencart.service.CustomerService;
 import io.cm.cm_opencart.service.OrderService;
-import io.cm.cm_opencart.service.ProductService;
+import io.cm.cm_opencart.vo.OrderProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailMapper orderDetailMapper;
 
     @Autowired
-    private ProductService productService;
+    private CustomerService customerService;
 
     @Override
     public Page<OrderListOutDTO> search(Integer pageNum) {
@@ -44,6 +45,8 @@ public class OrderServiceImpl implements OrderService {
         OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
         orderShowOutDTO.setOrderId(orderId);
         orderShowOutDTO.setCustomerId(order.getCustomerId());
+        Customer customer = customerService.getById(order.getCustomerId());
+        orderShowOutDTO.setCustomerName(customer.getRealName());
         orderShowOutDTO.setStatus(order.getStatus());
         orderShowOutDTO.setTotalPrice(order.getTotalPrice());
         orderShowOutDTO.setRewordPoints(order.getRewordPoints());
@@ -57,8 +60,9 @@ public class OrderServiceImpl implements OrderService {
         orderShowOutDTO.setInvoiceAddress(orderDetail.getInvoiceAddress());
         orderShowOutDTO.setInvoicePrice(orderDetail.getInvoicePrice());
         orderShowOutDTO.setComment(orderDetail.getComment());
-        List<OrderProductShowOutDTO> orderProductShowOutDTOS = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductShowOutDTO.class);
-        orderShowOutDTO.setOrderProducts(orderProductShowOutDTOS);
+
+        List<OrderProductVO> orderProductVO = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductVO.class);
+        orderShowOutDTO.setOrderProducts(orderProductVO);
 
         return orderShowOutDTO;
     }
