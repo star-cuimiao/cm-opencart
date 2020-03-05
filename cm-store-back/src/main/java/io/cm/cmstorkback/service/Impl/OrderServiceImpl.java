@@ -1,10 +1,13 @@
 package io.cm.cmstorkback.service.Impl;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.cm.cmstorkback.dao.OrderDetailMapper;
 import io.cm.cmstorkback.dao.OrderMapper;
 import io.cm.cmstorkback.dto.in.OrderCheckoutInDTO;
 import io.cm.cmstorkback.dto.in.OrderProductInDTO;
+import io.cm.cmstorkback.dto.out.OrderShowOutDTO;
 import io.cm.cmstorkback.enumeration.OrderStatus;
 import io.cm.cmstorkback.po.Address;
 import io.cm.cmstorkback.po.Order;
@@ -99,5 +102,34 @@ public class OrderServiceImpl implements OrderService {
         orderDetailMapper.insertSelective(orderDetail);
 
         return orderId;
+    }
+
+    @Override
+    public Page<Order> getByCustomerId(Integer pageNum, Integer customerId) {
+        PageHelper.startPage(pageNum,10);
+        Page<Order> order = orderMapper.selectByCustomerId(customerId);
+        return order;
+    }
+
+    @Override
+    public OrderShowOutDTO getById(Long orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(order.getOrderId());
+        OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
+        orderShowOutDTO.setOrderId(order.getOrderId());
+        orderShowOutDTO.setStatus(order.getStatus());
+        orderShowOutDTO.setTotalPrice(order.getTotalPrice());
+        orderShowOutDTO.setRewordPoints(order.getRewordPoints());
+        orderShowOutDTO.setCreateTimestamp(order.getCreateTime().getTime());
+        orderShowOutDTO.setUpdateTimestamp(order.getUpdateTime().getTime());
+        orderShowOutDTO.setShipAddress(orderDetail.getShipAddress());
+        orderShowOutDTO.setShipPrice(orderDetail.getShipPrice());
+        orderShowOutDTO.setPayMethod(orderDetail.getPayMethod());
+        orderShowOutDTO.setInvoiceAddress(orderDetail.getInvoiceAddress());
+        orderShowOutDTO.setInvoicePrice(orderDetail.getInvoicePrice());
+        orderShowOutDTO.setComment(orderDetail.getComment());
+        //        private List<OrderProductOutDTO> orderProducts;
+//        private List<OrderHistoryListOutDTO> orderHistories;
+        return orderShowOutDTO;
     }
 }
