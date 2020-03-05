@@ -1,15 +1,13 @@
 package io.cm.cm_opencart.dao;
 
 import com.github.pagehelper.Page;
-import io.cm.cm_opencart.dto.out.CustomerListOutDTO;
 import io.cm.cm_opencart.po.Customer;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerMapper {
 
-    Page<CustomerListOutDTO> search();
+    Page<Customer> search();
 
     int deleteByPrimaryKey(Integer customerId);
 
@@ -23,5 +21,4 @@ public interface CustomerMapper {
 
     int updateByPrimaryKey(Customer record);
 
-    Integer disable(@Param("customerId") Integer customerId);
 }

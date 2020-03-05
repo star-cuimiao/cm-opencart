@@ -1,14 +1,13 @@
 package io.cm.cm_opencart.service;
 
 import com.github.pagehelper.Page;
-import io.cm.cm_opencart.dto.out.CustomerListOutDTO;
 import io.cm.cm_opencart.dto.out.CustomerShowOutDTO;
+import io.cm.cm_opencart.po.Customer;
 
 public interface CustomerService {
 
-    Page<CustomerListOutDTO> search(Integer pageNum);
+    Page<Customer> search(Integer pageNum);
 
     CustomerShowOutDTO getById(Integer customerId);
 
-    Integer disable(Integer customerId);
 }

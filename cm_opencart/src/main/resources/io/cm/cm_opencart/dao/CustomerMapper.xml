@@ -17,21 +17,11 @@
     <result column="reword_points" jdbcType="INTEGER" property="rewordPoints" />
     <result column="default_address_id" jdbcType="INTEGER" property="defaultAddressId" />
   </resultMap>
-
-  <resultMap id="CustomerListOutDTO" type="io.cm.cm_opencart.dto.out.CustomerListOutDTO">
-    <id column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="real_name" jdbcType="VARCHAR" property="realName" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="create_time" jdbcType="TINYINT" property="createTimestamp" />
-  </resultMap>
   <sql id="Base_Column_List">
     customer_id, username, real_name, avatar_url, encrypted_password, mobile, mobile_verified, 
     email, email_verified, status, create_time, news_subscribed, reword_points, default_address_id
   </sql>
-  <select id="search"  resultMap="CustomerListOutDTO">
+  <select id="search"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from jcart_customer
@@ -209,12 +199,6 @@
       news_subscribed = #{newsSubscribed,jdbcType=BIT},
       reword_points = #{rewordPoints,jdbcType=INTEGER},
       default_address_id = #{defaultAddressId,jdbcType=INTEGER}
-    where customer_id = #{customerId,jdbcType=INTEGER}
-  </update>
-  <update id="disable" parameterType="io.cm.cm_opencart.po.Customer">
-    update jcart_customer
-    set
-      status = #{status,jdbcType=TINYINT},
     where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
 </mapper>
