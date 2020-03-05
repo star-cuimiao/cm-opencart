@@ -3,7 +3,7 @@ package io.cm.cm_opencart.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.CustomerMapper;
-import io.cm.cm_opencart.dto.out.CustomerShowOutDTO;
+import io.cm.cm_opencart.dto.in.CustomerSetStatusInDTO;
 import io.cm.cm_opencart.po.Customer;
 import io.cm.cm_opencart.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +23,18 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public CustomerShowOutDTO getById(Integer customerId) {
+    public Customer getById(Integer customerId) {
 
         Customer customer = customerMapper.selectByPrimaryKey(customerId);
+        return customer;
+    }
 
-        CustomerShowOutDTO customerShowOutDTO = new CustomerShowOutDTO();
-        customerShowOutDTO.setCustomerId(customer.getCustomerId());
-        customerShowOutDTO.setUsername(customer.getUsername());
-        customerShowOutDTO.setRealName(customer.getRealName());
-        customerShowOutDTO.setAvatarUrl(customer.getAvatarUrl());
-        customerShowOutDTO.setMobile(customer.getMobile());
-        customerShowOutDTO.setEmail(customer.getEmail());
-        customerShowOutDTO.setStatus(customer.getStatus());
-        customerShowOutDTO.setCreateTimestamp(customer.getCreateTime().getTime());
-        customerShowOutDTO.setNewsSubscribed(customer.getNewsSubscribed());
-        customerShowOutDTO.setRewordPoints(customer.getRewordPoints());
-        customerShowOutDTO.setDefaultAddressId(customer.getDefaultAddressId());
-
-        return customerShowOutDTO;
+    @Override
+    public void setStatus(CustomerSetStatusInDTO customerSetStatusInDTO) {
+        Customer customer =new Customer();
+        customer.setCustomerId(customerSetStatusInDTO.getCustomerId());
+        customer.setStatus(customerSetStatusInDTO.getStatus());
+        customerMapper.updateByPrimaryKeySelective(customer);
     }
 
 }
