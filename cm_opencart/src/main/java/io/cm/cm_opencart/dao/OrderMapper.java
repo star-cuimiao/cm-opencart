@@ -1,5 +1,7 @@
 package io.cm.cm_opencart.dao;
 
+import com.github.pagehelper.Page;
+import io.cm.cm_opencart.dto.out.OrderListOutDTO;
 import io.cm.cm_opencart.po.Order;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    Page<OrderListOutDTO> search();
 }

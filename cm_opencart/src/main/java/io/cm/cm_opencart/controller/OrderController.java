@@ -1,5 +1,6 @@
 package io.cm.cm_opencart.controller;
 
+import com.github.pagehelper.Page;
 import io.cm.cm_opencart.dto.in.OrderSearchInDTO;
 import io.cm.cm_opencart.dto.out.*;
 import io.cm.cm_opencart.service.OrderService;
@@ -16,13 +17,19 @@ public class OrderController {
 
     @GetMapping("/search")
     public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
-                                              @RequestParam Integer pageNum){
-        return null;
+                                              @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        Page<OrderListOutDTO> page = orderService.search(pageNum);
+        PageOutDTO pageOutDTO = new PageOutDTO();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(page);
+
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")
-    public OrderShowOutDTO getById(@RequestParam Integer orderId){
-        return null;
+    public OrderShowOutDTO getById(@RequestParam Long orderId){
+            return null;
 
     }
 
