@@ -6,6 +6,7 @@ import io.cm.cmstorkback.dto.out.PageOutDTO;
 import io.cm.cmstorkback.dto.out.ReturnHistoryListOutDTO;
 import io.cm.cmstorkback.dto.out.ReturnListOutDTO;
 import io.cm.cmstorkback.dto.out.ReturnShowOutDTO;
+import io.cm.cmstorkback.enumeration.ReturnStatus;
 import io.cm.cmstorkback.po.Return;
 import io.cm.cmstorkback.po.ReturnHistory;
 import io.cm.cmstorkback.service.ReturnHistoryService;
@@ -13,6 +14,7 @@ import io.cm.cmstorkback.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,8 +32,26 @@ public class ReturnController {
     @PostMapping("/apply")
     public Integer apply(@RequestBody ReturnApplyInDTO returnApplyInDTO,
                          @RequestAttribute Integer customerId) {
-
-        return null;
+        Return aReturn = new Return();
+        aReturn.setOrderId(returnApplyInDTO.getOrderId());
+        aReturn.setOrderTime(new Date(returnApplyInDTO.getOrderTimestamp()));
+        aReturn.setCustomerId(customerId);
+        aReturn.setCustomerName(returnApplyInDTO.getCustomerName());
+        aReturn.setMobile(returnApplyInDTO.getMobile());
+        aReturn.setEmail(returnApplyInDTO.getEmail());
+        aReturn.setStatus((byte) ReturnStatus.ToProcess.ordinal());
+        aReturn.setProductCode(returnApplyInDTO.getProductCode());
+        aReturn.setProductName(returnApplyInDTO.getProductName());
+        aReturn.setQuantity(returnApplyInDTO.getQuantity());
+        aReturn.setReason(returnApplyInDTO.getReason());
+        aReturn.setOpened(returnApplyInDTO.getOpened());
+        aReturn.setComment(returnApplyInDTO.getComment());
+        Date now = new Date();
+        aReturn.setCreateTime(now);
+        aReturn.setUpdateTime(now);
+        returnService.create(aReturn);
+        Integer returnId = aReturn.getReturnId();
+        return returnId;
     }
 
     @GetMapping("/getList")
