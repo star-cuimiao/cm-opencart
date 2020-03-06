@@ -1,19 +1,13 @@
 package io.cm.cm_opencart.dto.out;
 
 public class ReturnHistoryListOutDTO {
-    private Integer returnHistoryId;
+    private Long returnHistoryId;
     private Long timestamp;
     private Byte returnStatus;
     private String comment;
     private Boolean customerNotified;
 
-    public Integer getReturnHistoryId() {
-        return returnHistoryId;
-    }
 
-    public void setReturnHistoryId(Integer returnHistoryId) {
-        this.returnHistoryId = returnHistoryId;
-    }
 
     public Long getTimestamp() {
         return timestamp;
@@ -45,5 +39,13 @@ public class ReturnHistoryListOutDTO {
 
     public void setCustomerNotified(Boolean customerNotified) {
         this.customerNotified = customerNotified;
+    }
+
+    public Long getReturnHistoryId() {
+        return returnHistoryId;
+    }
+
+    public void setReturnHistoryId(Long returnHistoryId) {
+        this.returnHistoryId = returnHistoryId;
     }
 }
