@@ -3,7 +3,6 @@ package io.cm.cmstorkback.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cmstorkback.dao.ReturnMapper;
-import io.cm.cmstorkback.dto.out.ReturnShowOutDTO;
 import io.cm.cmstorkback.po.Return;
 import io.cm.cmstorkback.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,8 @@ public class ReturnServiceImpl implements ReturnService {
     }
 
     @Override
-    public ReturnShowOutDTO getById(Integer returnId) {
-        return null;
+    public Return getById(Integer returnId) {
+        Return aReturn = returnMapper.selectByPrimaryKey(returnId);
+        return aReturn;
     }
 }

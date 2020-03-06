@@ -3,9 +3,11 @@ package io.cm.cmstorkback.controller;
 import com.github.pagehelper.Page;
 import io.cm.cmstorkback.dto.in.ReturnApplyInDTO;
 import io.cm.cmstorkback.dto.out.PageOutDTO;
+import io.cm.cmstorkback.dto.out.ReturnHistoryListOutDTO;
 import io.cm.cmstorkback.dto.out.ReturnListOutDTO;
 import io.cm.cmstorkback.dto.out.ReturnShowOutDTO;
 import io.cm.cmstorkback.po.Return;
+import io.cm.cmstorkback.po.ReturnHistory;
 import io.cm.cmstorkback.service.ReturnHistoryService;
 import io.cm.cmstorkback.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,37 @@ public class ReturnController {
 
     @GetMapping("/getById")
     public ReturnShowOutDTO getById(@RequestParam Integer returnId) {
-//        returnService.
-        return null;
+        Return aReturn = returnService.getById(returnId);
+
+        ReturnShowOutDTO returnShowOutDTO = new ReturnShowOutDTO();
+        returnShowOutDTO.setReturnId(aReturn.getReturnId());
+        returnShowOutDTO.setOrderId(aReturn.getOrderId());
+        returnShowOutDTO.setOrderTimestamp(aReturn.getOrderTime().getTime());
+        returnShowOutDTO.setCustomerName(aReturn.getCustomerName());
+        returnShowOutDTO.setMobile(aReturn.getMobile());
+        returnShowOutDTO.setEmail(aReturn.getEmail());
+        returnShowOutDTO.setStatus(aReturn.getStatus());
+        returnShowOutDTO.setAction(aReturn.getAction());
+        returnShowOutDTO.setProductCode(aReturn.getProductCode());
+        returnShowOutDTO.setProductName(aReturn.getProductName());
+        returnShowOutDTO.setQuantity(aReturn.getQuantity());
+        returnShowOutDTO.setReason(aReturn.getReason());
+        returnShowOutDTO.setOpened(aReturn.getOpened());
+        returnShowOutDTO.setComment(aReturn.getComment());
+        returnShowOutDTO.setCreateTimestamp(aReturn.getCreateTime().getTime());
+        returnShowOutDTO.setUpdateTimestamp(aReturn.getUpdateTime().getTime());
+
+        List<ReturnHistory> returnHistories = returnHistoryService.getByReturnId(returnId);
+        List<ReturnHistoryListOutDTO> returnHistoryListOutDTOS = returnHistories.stream().map(returnHistory -> {
+            ReturnHistoryListOutDTO returnHistoryListOutDTO = new ReturnHistoryListOutDTO();
+            returnHistoryListOutDTO.setTimestamp(returnHistory.getTime().getTime());
+            returnHistoryListOutDTO.setReturnStatus(returnHistory.getReturnStatus());
+            returnHistoryListOutDTO.setComment(returnHistory.getComment());
+            return returnHistoryListOutDTO;
+        }).collect(Collectors.toList());
+        returnShowOutDTO.setReturnHistories(returnHistoryListOutDTOS);
+
+        return returnShowOutDTO;
     }
 
 
