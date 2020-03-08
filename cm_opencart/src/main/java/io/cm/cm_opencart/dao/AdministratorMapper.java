@@ -28,4 +28,6 @@ public interface AdministratorMapper {
 
     int batchDelete(@Param("administratorIds") List<Integer> administratorIds);
 
+    Administrator selecteByEmail(@Param("email") String email);
+
 }
