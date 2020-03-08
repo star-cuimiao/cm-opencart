@@ -11,10 +11,17 @@ import io.cm.cm_opencart.po.Administrator;
 import io.cm.cm_opencart.service.AdministratorService;
 import io.cm.cm_opencart.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,6 +33,17 @@ public class AdministratorController {
     private AdministratorService administratorService;
     @Autowired
     private JWTUtil jwtUtil;
+
+    @Autowired
+    private SecureRandom secureRandom;
+
+    @Autowired
+    private JavaMailSender emailSender;
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
+    private Map<String,String> emailPwdResetCodeMap = new HashMap<>();
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
@@ -68,10 +86,23 @@ public class AdministratorController {
         administrator.setAvatarUrl(administratorUpdateProfileInDTO.getAvatarUrl());
         administratorService.update(administrator);
     }
+    @PostMapping("/changePwd")
+    public void changePwd(@RequestBody AdministratorChangePwdInDTO administratorChangePwdInDTO,
+                          @RequestAttribute Integer administratorId){
+
+    }
 
     @GetMapping("/getPwdResetCode")
-    public String getPwdResetCode(@RequestParam String email){
-        return null;
+    public void getPwdResetCode(@RequestParam String email){
+        byte[] bytes = secureRandom.generateSeed(3);
+        String hex = DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(email);
+        message.setSubject("jcart管理端管理员密码重置");
+        message.setText(hex);
+        emailSender.send(message);
+        emailPwdResetCodeMap.put(email,hex);
     }
 
     @PostMapping("/resetPwd")
@@ -87,6 +118,7 @@ public class AdministratorController {
             AdministratorListOutDTO administratorListOutDTO = new AdministratorListOutDTO();
             administratorListOutDTO.setAdministratorId(administrator.getAdministratorId());
             administratorListOutDTO.setUsername(administrator.getUsername());
+            administratorListOutDTO.setRealName(administrator.getRealName());
             administratorListOutDTO.setStatus(administrator.getStatus());
             administratorListOutDTO.setCreateTimestamp(administrator.getCreateTime().getTime());
             return  administratorListOutDTO;
