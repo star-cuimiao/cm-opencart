@@ -3,6 +3,7 @@ package io.cm.cm_opencart.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.CustomerMapper;
+import io.cm.cm_opencart.dto.in.CustomerSearchInDTO;
 import io.cm.cm_opencart.dto.in.CustomerSetStatusInDTO;
 import io.cm.cm_opencart.po.Customer;
 import io.cm.cm_opencart.service.CustomerService;
@@ -16,9 +17,13 @@ public class CustomerServiceImpl implements CustomerService{
     private CustomerMapper customerMapper;
 
     @Override
-    public Page<Customer> search(Integer pageNum) {
+    public Page<Customer> search(CustomerSearchInDTO customerSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum,5);
-        Page<Customer> page = customerMapper.search();
+        Page<Customer> page = customerMapper.search(customerSearchInDTO.getUsername(),
+                                                    customerSearchInDTO.getRealName(),
+                                                    customerSearchInDTO.getMobile(),
+                                                    customerSearchInDTO.getEmail(),
+                                                    customerSearchInDTO.getStatus());
         return page;
     }
 
