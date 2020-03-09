@@ -31,6 +31,7 @@ public class AdministratorController {
 
     @Autowired
     private AdministratorService administratorService;
+
     @Autowired
     private JWTUtil jwtUtil;
 
@@ -88,8 +89,18 @@ public class AdministratorController {
     }
     @PostMapping("/changePwd")
     public void changePwd(@RequestBody AdministratorChangePwdInDTO administratorChangePwdInDTO,
-                          @RequestAttribute Integer administratorId){
-
+                          @RequestAttribute Integer administratorId) throws ClientException {
+        Administrator administrator = administratorService.getById(administratorId);
+        String encPwdDB = administrator.getEncryptedPassword();
+        BCrypt.Result result = BCrypt.verifyer().verify(administratorChangePwdInDTO.getOriginPwd().toCharArray(), encPwdDB);
+        if(result.verified){
+            String newPwd = administratorChangePwdInDTO.getNewPwd();
+            String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
+            administrator.setEncryptedPassword(bcryptHashString);
+            administratorService.update(administrator);
+        }else{
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PASSWORD_INVALID_ERRMSG);
+        }
     }
 
     @GetMapping("/getPwdResetCode")
