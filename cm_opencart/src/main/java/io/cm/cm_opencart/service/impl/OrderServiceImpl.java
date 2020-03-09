@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.OrderDetailMapper;
 import io.cm.cm_opencart.dao.OrderMapper;
+import io.cm.cm_opencart.dto.in.OrderSearchInDTO;
 import io.cm.cm_opencart.dto.out.OrderListOutDTO;
 import io.cm.cm_opencart.dto.out.OrderShowOutDTO;
 import io.cm.cm_opencart.po.Customer;
@@ -30,9 +31,12 @@ public class OrderServiceImpl implements OrderService {
     private CustomerService customerService;
 
     @Override
-    public Page<OrderListOutDTO> search(Integer pageNum) {
+    public Page<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<OrderListOutDTO> page = orderMapper.search();
+        Page<OrderListOutDTO> page = orderMapper.search(orderSearchInDTO.getOrderId(),
+                                                        orderSearchInDTO.getCustomerName(),
+                                                        orderSearchInDTO.getTotalPrice(),
+                                                        orderSearchInDTO.getStatus());
         return page;
     }
 

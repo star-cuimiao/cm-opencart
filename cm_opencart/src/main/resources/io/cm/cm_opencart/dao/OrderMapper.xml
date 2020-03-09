@@ -121,6 +121,20 @@
     SELECT o.*,c.real_name FROM jcart_order as o
     left join jcart_customer as c
     on o.customer_id = c.customer_id
+    <where>
+      <if test="orderId!= null">
+        o.order_id=#{orderId}
+      </if>
+      <if test="customerName !=null and customerName !=''">
+        and c.real_name like concat('%',#{customerName},'%')
+      </if>
+      <if test="totalPrice !=null ">
+        and o.total_price &lt;={totalPrice}
+      </if>
+      <if test="status != null">
+        and o.status=#{status}
+      </if>
+    </where>
     order by create_time desc
   </select>
 </mapper>
