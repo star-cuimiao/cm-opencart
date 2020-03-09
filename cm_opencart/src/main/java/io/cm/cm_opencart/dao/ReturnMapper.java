@@ -2,6 +2,7 @@ package io.cm.cm_opencart.dao;
 
 import com.github.pagehelper.Page;
 import io.cm.cm_opencart.po.Return;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,5 +19,10 @@ public interface ReturnMapper {
 
     int updateByPrimaryKey(Return record);
 
-    Page<Return> search();
+    Page<Return> search(@Param("returnId") Integer returnId,
+                        @Param("orderId")Long orderId,
+                        @Param("customerName") String customerName,
+                        @Param("productCode") String productCode,
+                        @Param("productName") String productName,
+                        @Param("status") Byte status);
 }

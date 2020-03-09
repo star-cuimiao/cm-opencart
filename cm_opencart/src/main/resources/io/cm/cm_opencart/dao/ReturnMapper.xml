@@ -236,5 +236,25 @@
     select
     <include refid="Base_Column_List" />
     from jcart_return
+    <where>
+      <if test="returnId != null">
+        return_id=#{returnId}
+      </if>
+      <if test="orderId != null">
+        and order_id=#{orderId}
+      </if>
+      <if test="customerName != null and customerName != ''">
+        and customer_name like concat('%',#{customerName},'%')
+      </if>
+      <if test="productCode != null" >
+        and product_code= #{productCode}
+      </if>
+      <if test="productName != null and productName !=''">
+        and product_name=#{productName}
+      </if>
+      <if test="status != null">
+        and status=#{status}
+      </if>
+    </where>
   </select>
 </mapper>

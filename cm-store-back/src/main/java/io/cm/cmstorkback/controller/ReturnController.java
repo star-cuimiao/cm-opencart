@@ -70,7 +70,7 @@ public class ReturnController {
             return returnListOutDTO;
         }).collect(Collectors.toList());
 
-        PageOutDTO pageOutDTO = new PageOutDTO();
+        PageOutDTO<ReturnListOutDTO> pageOutDTO = new PageOutDTO<>();
         pageOutDTO.setTotal(page.getTotal());
         pageOutDTO.setPageNum(page.getPageNum());
         pageOutDTO.setPageSize(page.getPageSize());

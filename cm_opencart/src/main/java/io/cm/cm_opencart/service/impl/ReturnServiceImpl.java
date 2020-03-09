@@ -3,6 +3,7 @@ package io.cm.cm_opencart.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cm_opencart.dao.ReturnMapper;
+import io.cm.cm_opencart.dto.in.ReturnSearchInDTO;
 import io.cm.cm_opencart.po.Return;
 import io.cm.cm_opencart.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,14 @@ public class ReturnServiceImpl implements ReturnService {
     private ReturnMapper returnMapper;
 
     @Override
-    public Page<Return> search(Integer pageNum) {
+    public Page<Return> search(ReturnSearchInDTO returnSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<Return> page = returnMapper.search();
+        Page<Return> page = returnMapper.search(returnSearchInDTO.getReturnId(),
+                                                returnSearchInDTO.getOrderId(),
+                                                returnSearchInDTO.getCustomerName(),
+                                                returnSearchInDTO.getProductCode(),
+                                                returnSearchInDTO.getProductName(),
+                                                returnSearchInDTO.getStatus());
         return page;
     }
 
