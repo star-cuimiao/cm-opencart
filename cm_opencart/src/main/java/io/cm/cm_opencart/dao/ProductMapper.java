@@ -11,7 +11,11 @@ import java.util.List;
 @Repository
 public interface ProductMapper {
 
-    Page<ProductListOutDTO> search();
+    Page<ProductListOutDTO> search(@Param("productCode") String productCode,
+                                   @Param("productName") String productName,
+                                   @Param("price")Double price,
+                                   @Param("stockQuantity")Integer stockQuantity,
+                                   @Param("status")Byte status);
 
     int deleteByPrimaryKey(Integer productId);
 
