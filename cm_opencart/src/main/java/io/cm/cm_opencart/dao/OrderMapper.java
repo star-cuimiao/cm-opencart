@@ -6,6 +6,8 @@ import io.cm.cm_opencart.po.Order;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 @Repository
 public interface OrderMapper {
     int deleteByPrimaryKey(Long orderId);
@@ -21,7 +23,9 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     Page<OrderListOutDTO> search(@Param("orderId") Long orderId,
-                                 @Param("customerName") String customerName,
+                                 @Param("status") Byte stastus,
                                  @Param("totalPrice") Double totalPrice,
-                                 @Param("status") Byte status);
+                                 @Param("customerName") String customerName,
+                                 @Param("startTime") Date startTime,
+                                 @Param("endTime") Date endTime);
 }
