@@ -29,9 +29,6 @@
       <if test="username!= null and username != ''">
         username=#{username}
       </if>
-      <if test="realName!= null and realName != ''">
-        and real_name like concat('%',#{realName},'%')
-      </if>
       <if test="mobile!= null and mobile != ''">
         and mobile=#{mobile}
       </if>
@@ -40,6 +37,9 @@
       </if>
       <if test="status!= null">
         and status=#{status}
+      </if>
+      <if test="realName!= null and realName != ''">
+        and real_name like concat('%',#{realName},'%')
       </if>
     </where>
   </select>
