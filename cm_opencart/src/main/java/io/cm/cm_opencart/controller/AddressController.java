@@ -17,7 +17,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @GetMapping("/getListCustomerId")
+    @GetMapping("/getListByCustomerId")
     public List<AddressListOutDTO> getListCustomerId(@RequestParam Integer customerId){
         List<AddressListOutDTO> listCustomerId = addressService.getListCustomerId(customerId);
         return listCustomerId;
