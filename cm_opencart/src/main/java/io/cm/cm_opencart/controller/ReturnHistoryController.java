@@ -19,7 +19,7 @@ public class ReturnHistoryController {
     @Autowired
     private ReturnHistoryService returnHistoryService;
 
-    @GetMapping("/getListReturnId")
+    @GetMapping("/getListByReturnId")
     public List<ReturnHistoryListOutDTO> getListReturnId(@RequestParam Integer returnId){
 
         List<ReturnHistory> returnHistories = returnHistoryService.getListByReturnId(returnId);
