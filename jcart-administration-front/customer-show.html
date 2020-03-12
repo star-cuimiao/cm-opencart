@@ -13,7 +13,7 @@
     <div id="app">
         客户用户名：{{username}} <br>
         客户姓名：{{realName}} <br>
-        客户头像：{{avatarUrl}} <br>
+        客户头像:<el-image style="width: 100px; height: 100px" :src="'http://localhost:20000/'+avatarUrl"></el-image> <br>
         手机：{{mobile}} <br>
         邮箱：{{email}} <br>
         状态：{{statuses[status].label}} <br>
