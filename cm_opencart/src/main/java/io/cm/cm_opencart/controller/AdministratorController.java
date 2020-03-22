@@ -7,10 +7,12 @@ import io.cm.cm_opencart.dto.in.*;
 import io.cm.cm_opencart.dto.out.*;
 import io.cm.cm_opencart.enumeration.AdministratorStatus;
 import io.cm.cm_opencart.exception.ClientException;
+import io.cm.cm_opencart.mq.EmailEvent;
 import io.cm.cm_opencart.po.Administrator;
 import io.cm.cm_opencart.service.AdministratorService;
 import io.cm.cm_opencart.util.EmailUtil;
 import io.cm.cm_opencart.util.JWTUtil;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +45,9 @@ public class AdministratorController {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+
     private Map<String,String> emailPwdResetCodeMap = new HashMap<>();
 
     @GetMapping("/login")
@@ -63,8 +68,8 @@ public class AdministratorController {
     }
 
     @GetMapping("/getProfile")
-    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer adminstratorId){
-        Administrator administrator = administratorService.getById(adminstratorId);
+    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
+        Administrator administrator = administratorService.getById(administratorId);
         AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
         administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
         administratorGetProfileOutDTO.setUsername(administrator.getUsername());
@@ -111,9 +116,15 @@ public class AdministratorController {
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
 
-        emailUtil.send(fromEmail,email,"jcart管理端管理员密码重置",hex);
+//        emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", hex);
+        EmailEvent emailEvent = new EmailEvent();
+        emailEvent.setToEmail(email);
+        emailEvent.setTitle("jcart管理端管理员密码重置");
+        emailEvent.setContent(hex);
+        rocketMQTemplate.convertAndSend("SendPwdResetByEmail", emailEvent);
+
         //todo send messasge to MQ
-        emailPwdResetCodeMap.put(email,hex);
+        emailPwdResetCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
@@ -152,14 +163,14 @@ public class AdministratorController {
     public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
 
         Page<Administrator> page = administratorService.getList(pageNum);
-        List<AdministratorListOutDTO> administratorListOutDTOS = page.stream().map(administrator ->{
+        List<AdministratorListOutDTO> administratorListOutDTOS = page.stream().map(administrator -> {
             AdministratorListOutDTO administratorListOutDTO = new AdministratorListOutDTO();
             administratorListOutDTO.setAdministratorId(administrator.getAdministratorId());
             administratorListOutDTO.setUsername(administrator.getUsername());
             administratorListOutDTO.setRealName(administrator.getRealName());
             administratorListOutDTO.setStatus(administrator.getStatus());
             administratorListOutDTO.setCreateTimestamp(administrator.getCreateTime().getTime());
-            return  administratorListOutDTO;
+            return administratorListOutDTO;
         }).collect(Collectors.toList());
 
         PageOutDTO<AdministratorListOutDTO> pageOutDTO = new PageOutDTO<>();
