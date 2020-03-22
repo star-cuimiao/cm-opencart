@@ -7,12 +7,10 @@ import io.cm.cm_opencart.dto.in.*;
 import io.cm.cm_opencart.dto.out.*;
 import io.cm.cm_opencart.enumeration.AdministratorStatus;
 import io.cm.cm_opencart.exception.ClientException;
-import io.cm.cm_opencart.mq.EmailEvent;
 import io.cm.cm_opencart.po.Administrator;
 import io.cm.cm_opencart.service.AdministratorService;
 import io.cm.cm_opencart.util.EmailUtil;
 import io.cm.cm_opencart.util.JWTUtil;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +42,6 @@ public class AdministratorController {
 
     @Value("${spring.mail.username}")
     private String fromEmail;
-
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
 
     private Map<String,String> emailPwdResetCodeMap = new HashMap<>();
 
@@ -116,12 +111,7 @@ public class AdministratorController {
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
 
-//        emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", hex);
-        EmailEvent emailEvent = new EmailEvent();
-        emailEvent.setToEmail(email);
-        emailEvent.setTitle("jcart管理端管理员密码重置");
-        emailEvent.setContent(hex);
-        rocketMQTemplate.convertAndSend("SendPwdResetByEmail", emailEvent);
+        emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", hex);
 
         //todo send messasge to MQ
         emailPwdResetCodeMap.put(email, hex);

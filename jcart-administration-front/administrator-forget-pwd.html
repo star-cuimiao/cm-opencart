@@ -14,11 +14,8 @@
         <dev v-loading="loading">
             <el-input v-model="email" placeholder="请输入找回邮箱"></el-input>
             <br>
-            <el-button type="primary" @click="handleFindBackPwdClick" :disabled="buttonEnabled">找回密码</el-button>
-            <dev v-show="!buttonEnabled">
-                {{counter}}秒
-            </dev>    
-        </dev>
+            <el-button type="primary" @click="handleFindBackPwdClick">找回密码</el-button>
+        </dev> 
     </div>
 
     <script src="assets/js/axios.min.js"></script>
