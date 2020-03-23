@@ -7,7 +7,10 @@ import io.cm.cmstorkback.dto.out.ProductListOutDTO;
 import io.cm.cmstorkback.dto.out.ProductShowOutDTO;
 import io.cm.cmstorkback.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -16,6 +19,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
@@ -33,7 +39,15 @@ public class ProductController {
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId){
         ProductShowOutDTO productShowOutDTO = productService.getShowById(productId);
+        //todo send msg to kafka
+        kafkaTemplate.send("hotproduct",productId);
+//        productOperationService.count(productId);
         return productShowOutDTO;
+    }
+
+    @GetMapping("/hot")
+    public List<ProductListOutDTO> hot(){
+        return null;
     }
 
 }
