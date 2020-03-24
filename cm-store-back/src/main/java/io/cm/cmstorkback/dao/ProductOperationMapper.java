@@ -3,6 +3,8 @@ package io.cm.cmstorkback.dao;
 import io.cm.cmstorkback.po.ProductOperation;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductOperationMapper {
     int deleteByPrimaryKey(Integer productId);
@@ -17,7 +19,7 @@ public interface ProductOperationMapper {
 
     int updateByPrimaryKey(ProductOperation record);
 
-//    custom
-//    List<ProductOperation> selectHotProduct();
+    //custom
+    List<ProductOperation> selectHotProduct();
 
 }

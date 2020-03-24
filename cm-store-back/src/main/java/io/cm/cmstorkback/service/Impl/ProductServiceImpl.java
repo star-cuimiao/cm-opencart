@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.cm.cmstorkback.dao.ProductDetailMapper;
 import io.cm.cmstorkback.dao.ProductMapper;
+import io.cm.cmstorkback.dao.ProductOperationMapper;
 import io.cm.cmstorkback.dto.out.ProductListOutDTO;
 import io.cm.cmstorkback.dto.out.ProductShowOutDTO;
 import io.cm.cmstorkback.po.Product;
@@ -23,6 +24,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDetailMapper productDetailMapper;
+
+    @Autowired
+    private ProductOperationMapper productOperationMapper;
 
     @Override
     public Product getById(Integer productId) {
@@ -60,4 +64,5 @@ public class ProductServiceImpl implements ProductService {
         Page<ProductListOutDTO> page = productMapper.search();
         return page;
     }
+
 }
