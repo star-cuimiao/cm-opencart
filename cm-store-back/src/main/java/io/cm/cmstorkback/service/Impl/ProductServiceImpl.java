@@ -6,8 +6,10 @@ import com.github.pagehelper.PageHelper;
 import io.cm.cmstorkback.dao.ProductDetailMapper;
 import io.cm.cmstorkback.dao.ProductMapper;
 import io.cm.cmstorkback.dao.ProductOperationMapper;
+import io.cm.cmstorkback.dto.in.ProductSearchInDTO;
 import io.cm.cmstorkback.dto.out.ProductListOutDTO;
 import io.cm.cmstorkback.dto.out.ProductShowOutDTO;
+import io.cm.cmstorkback.enumeration.ProductStatus;
 import io.cm.cmstorkback.po.Product;
 import io.cm.cmstorkback.po.ProductDetail;
 import io.cm.cmstorkback.service.ProductService;
@@ -59,9 +61,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductListOutDTO> search(Integer pageNum) {
+    public Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
+                                          Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
-        Page<ProductListOutDTO> page = productMapper.search();
+        Page<ProductListOutDTO> page = productMapper.search(productSearchInDTO.getKeyword(), (byte) ProductStatus.OnSales.ordinal());
         return page;
     }
 

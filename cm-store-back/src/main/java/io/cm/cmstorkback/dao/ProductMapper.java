@@ -3,11 +3,14 @@ package io.cm.cmstorkback.dao;
 import com.github.pagehelper.Page;
 import io.cm.cmstorkback.dto.out.ProductListOutDTO;
 import io.cm.cmstorkback.po.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductMapper {
-    Page<ProductListOutDTO> search();
+
+    Page<ProductListOutDTO> search(@Param("keyword") String keyword,
+                                   @Param("status") Byte status);
 
     int deleteByPrimaryKey(Integer productId);
 
